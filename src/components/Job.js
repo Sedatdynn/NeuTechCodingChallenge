@@ -1,46 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 const Job = (shows) => {
-    const{
+  const {
     company,
-    featured,
     contract,
-   
+    featured,
     id,
     languages,
     level,
     location,
     logo,
+
     position,
     postedAt,
     role,
     tools,
-    } = shows.data;
-    let keywords = [role,level,...languages,...tools];
-  return (
-    <div className='job-container'>
-        <div className='logo'>
-        <img src={logo} alt =''/>
-        </div>
-        <div className='part1'>
-            <div className='company'>
-                <div className='cname'>{company}</div>
-                {shows.data.new && <span className='new'> new </span> }
-                {shows.data.featured && <span className='"featured'>featured </span> }
-            </div>
-            <div className='position'> {position}</div>
-            <div className='details'>
-                <span>{postedAt}</span>
-                <span>{contract}</span>
-                <span>{location}</span>
-            </div>
-        </div>
-    <div className='part2'>
-        {keywords.map((i => {  }))}
+  } = shows.data;
 
+  let keywords = [role, level, ...languages, ...tools];
+
+  const [icon, setIcon] = useState("");
+
+  function importAllSvg() {
+        const logoSvg = import(`${logo}`).then((dat) => {
+            setIcon(dat.default);
+        });
+    }
+
+  useEffect(() => {
+    importAllSvg();
+  }, [logo]);
+
+  return (
+    <div
+      className={
+        featured ? "job-container job-container--borderLeft" : "job-container"
+      }
+    >
+      <div className="logo">
+        <img src={icon} alt="" />
+      </div>
+      <div className="part1">
+        <div className="company">
+          <span className="cname">{company}</span>
+          {shows.data.new && <span className="new">new!</span>}
+          {shows.data.featured && <span className="featured">featured</span>}
+        </div>
+
+        <div className="position">{position}</div>
+
+        <div className="details">
+          <span>{postedAt}</span>
+          <span>&nbsp;•&nbsp;</span>
+          <span>{contract}</span>
+          <span>&nbsp;•&nbsp;</span>
+          <span>{location}</span>
+        </div>
+      </div>
+
+      <div className="part2">
+        {keywords.map((key, id) => (
+          <span onClick={() => shows.setkeywords(key)} key={id}>
+            {key}
+          </span>
+        ))}
+      </div>
     </div>
-    </div>
-    );
+  );
 };
 
-export default Job
+export default Job;

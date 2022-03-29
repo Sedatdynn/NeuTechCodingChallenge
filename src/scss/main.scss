@@ -1,32 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap");
 
 
 
-
-:root{
-  --primary-color: hsl(180, 29%, 50%);
-  --background-color:hsl(180, 52%, 96%);
-  --filter-color:hsl(180, 31%, 95%);
-  --dark-grayish: hsl(180, 8%, 52%);
-  --very-dark-grayish: hsl(180, 14%, 20%);
-
+:root {
+  --primary-color: rgb(91, 164, 164);
+  --background-color: hsl(180, 52%, 96%);
+  --filter-table: hsl(180, 31%, 95%);
+  --dark-greyish: hsl(180, 8%, 52%);
+  --very-dark-greyish: hsl(180, 14%, 20%);
 }
 
-*,*::before,*,::after{
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-} 
+}
 
-html{
+html {
   font-size: 15px;
   font-weight: 500;
   box-sizing: border-box;
 }
 
-
-body{
-  font-family: 'Spartan', sans-serif;
+body {
+  font-family: "Spartan", sans-serif;
   background-color: var(--background-color);
+}
+
+@media only screen and (max-width: 375px) {
+  html {
+    font-size: 0.75rem;
+  }
 }
 
